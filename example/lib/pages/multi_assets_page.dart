@@ -24,6 +24,7 @@ class _MultiAssetsPageState extends State<MultiAssetsPage>
   @override
   List<PickMethod> get pickMethods {
     return <PickMethod>[
+      PickMethod.cameraAndStay(maxAssetsCount: maxAssetsCount),
       PickMethod.common(maxAssetsCount),
       PickMethod.image(maxAssetsCount),
       PickMethod.video(maxAssetsCount),
@@ -33,7 +34,6 @@ class _MultiAssetsPageState extends State<MultiAssetsPage>
         handleResult: (BuildContext context, AssetEntity result) =>
             Navigator.of(context).pop(<AssetEntity>[...assets, result]),
       ),
-      PickMethod.cameraAndStay(maxAssetsCount: maxAssetsCount),
       PickMethod.changeLanguages(maxAssetsCount),
       PickMethod.threeItemsGrid(maxAssetsCount),
       PickMethod.prependItem(maxAssetsCount),
@@ -58,7 +58,7 @@ class _MultiAssetsPageState extends State<MultiAssetsPage>
       PickMethod.keepScrollOffset(
         delegate: () => keepScrollDelegate!,
         onPermission: (PermissionState state) {
-          keepScrollDelegate ??= DefaultAssetPickerBuilderDelegate(
+          keepScrollDelegate ??= MLAssetPickerBuilderDelegate(
             provider: keepScrollProvider,
             initialPermission: state,
             keepScrollOffset: true,

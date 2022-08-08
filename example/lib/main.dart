@@ -11,7 +11,7 @@ import 'constants/extensions.dart';
 import 'constants/screens.dart';
 import 'pages/splash_page.dart';
 
-const Color themeColor = Color(0xff00bc56);
+const Color themeColor = Color(0xff366FEB);
 
 String? packageVersion;
 
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Screens.mediaQuery.platformBrightness,
         primarySwatch: themeColor.swatch,
+        backgroundColor: Colors.white,
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: themeColor,
         ),

@@ -140,6 +140,10 @@ class PickMethod {
             maxAssets: maxAssetsCount,
             selectedAssets: assets,
             specialItemPosition: SpecialItemPosition.prepend,
+            pickerTheme: AssetPicker.themeData(
+              Colors.blueAccent,
+              light: true,
+            ),
             specialItemBuilder: (
               BuildContext context,
               AssetPathEntity? path,
@@ -161,8 +165,8 @@ class PickMethod {
                     }
                     final AssetPicker<AssetEntity, AssetPathEntity> picker =
                         context.findAncestorWidgetOfExactType()!;
-                    final DefaultAssetPickerBuilderDelegate builder =
-                        picker.builder as DefaultAssetPickerBuilderDelegate;
+                    final MLAssetPickerBuilderDelegate builder =
+                        picker.builder as MLAssetPickerBuilderDelegate;
                     final DefaultAssetPickerProvider p = builder.provider;
                     await p.switchPath(
                       PathWrapper<AssetPathEntity>(
@@ -172,8 +176,16 @@ class PickMethod {
                     );
                     p.selectAsset(result);
                   },
-                  child: const Center(
-                    child: Icon(Icons.camera_enhance, size: 42.0),
+                  child: Container(
+                    color: Colors.white,
+                    child:  Center(
+                      child: Column(
+                        children: const [
+                          Icon(Icons.camera_alt_sharp, size: 42.0),
+                          Text('Chụp ảnh')
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               );
@@ -295,7 +307,7 @@ class PickMethod {
   }
 
   factory PickMethod.keepScrollOffset({
-    required DefaultAssetPickerBuilderDelegate Function() delegate,
+    required MLAssetPickerBuilderDelegate Function() delegate,
     required Function(PermissionState state) onPermission,
     GestureLongPressCallback? onLongPress,
   }) {

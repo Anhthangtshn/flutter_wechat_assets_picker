@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:wechat_assets_picker/src/delegates/ml_asset_picker_builder_delegate.dart';
 
 import '../constants/config.dart';
 import '../constants/constants.dart';
@@ -56,7 +57,7 @@ class AssetPickerDelegate {
   ///  * [AssetPickerConfig] which holds all configurations for basic picking.
   ///  * [DefaultAssetPickerProvider] which is the default provider that
   ///    manages assets during the picking process.
-  ///  * [DefaultAssetPickerBuilderDelegate] which is the default builder that
+  ///  * [MLAssetPickerBuilderDelegate] which is the default builder that
   ///    builds all widgets during the picking process.
   /// {@endtemplate}
   Future<List<AssetEntity>?> pickAssets(
@@ -84,7 +85,7 @@ class AssetPickerDelegate {
     );
     final Widget picker = AssetPicker<AssetEntity, AssetPathEntity>(
       key: key,
-      builder: DefaultAssetPickerBuilderDelegate(
+      builder: MLAssetPickerBuilderDelegate(
         provider: provider,
         initialPermission: ps,
         gridCount: pickerConfig.gridCount,
@@ -199,7 +200,9 @@ class AssetPickerDelegate {
   /// Set [light] to true if pickers require a light version of the theme.
   /// 设置 [light] 为 true 时可以获取浅色版本的主题。
   /// {@endtemplate}
-  ThemeData themeData(Color? themeColor, {bool light = false}) {
+  ThemeData
+
+  themeData(Color? themeColor, {bool light = false}) {
     themeColor ??= defaultThemeColorWeChat;
     if (light) {
       return ThemeData.light().copyWith(
